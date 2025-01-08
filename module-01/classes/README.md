@@ -504,7 +504,116 @@ private static Double multiplyValues(Double number1, Double number2) {
 <details>
   <summary>Repetition Structures</summary>
 
+### For
+
 ```Java
+for (int i = 0; i < 10; i++) {
+    System.out.println("hello");
+}
+```
+
+### While
+
+```Java
+Scanner scanner = new Scanner(System.in);
+
+boolean keep = true;
+
+while (keep) {
+    System.out.println("1. Register Product.");
+    System.out.println("2. List Product.");
+    System.out.println("3. Delete Product.");
+    System.out.println("0. Exit Menu.");
+    Integer choice = scanner.nextInt();
+    switch (choice) {
+        case 1 -> System.out.println("Register Product.");
+        case 2 -> System.out.println("List Product.");
+        case 3 -> System.out.println("Delete Product.");
+        case 0 -> {
+            System.out.println("Exit Menu.");
+            keep = false;
+        }
+    }
+}
+```
+
+### Do-While
+
+```Java
+Scanner scanner = new Scanner(System.in);
+
+boolean keep = true;
+
+do {
+    System.out.println("1. Register Product.");
+    System.out.println("2. List Product.");
+    System.out.println("3. Delete Product.");
+    System.out.println("0. Exit Menu.");
+    Integer choice = scanner.nextInt();
+    switch (choice) {
+        case 1 -> System.out.println("Register Product.");
+        case 2 -> System.out.println("List Product.");
+        case 3 -> System.out.println("Delete Product.");
+        case 0 -> {
+            System.out.println("Exit Menu.");
+            keep = false;
+        }
+    }
+} while (keep);
+```
+
+### Recursion
+
+```Java
+public static void main(String[] args) {
+    repeat(0, 10);
+}
+
+public static void repeat(int repeatNumber, int finalNumber) {
+    if (repeatNumber<=finalNumber) {
+        System.out.println(repeatNumber);
+        repeat(++repeatNumber, finalNumber);
+    }
+}
+```
+
+### Array Recursion
+
+```Java
+public static void main(String[] args) {
+
+    int[] list = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    repeat(list, 4);
+}
+
+public static void repeat(int[] list, int startPosition) {
+    if (list.length>startPosition) {
+        System.out.println(list[startPosition]);
+        startPosition++;
+        repeat(list, startPosition);
+    }
+}
+```
+
+### ForList
+
+```Java
+int[] list = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+for (int number : list) {
+    System.out.println(number);
+}
+```
+
+### ForEach
+
+```Java
+List<String> list = List.of("arthur", "pedro", "amanda");
+list.forEach(item -> {
+    String firstLetter = item.substring(0, 1).toUpperCase();
+    String restOfName = item.substring(1, item.length());
+    String fullName = firstLetter + restOfName;
+    System.out.println(fullName);
+});
 ```
 
 </details>
@@ -512,9 +621,121 @@ private static Double multiplyValues(Double number1, Double number2) {
 ---
 
 <details>
-  <summary>Arrays, Matrix, String</summary>
+  <summary>Matrix</summary>
+
+### Tic Tac Toe
 
 ```Java
+public class Matrix {
+    static Scanner scanner = new Scanner(System.in);
+
+    static String[][] board = {
+            {"_", "_", "_"},
+            {"_", "_", "_"},
+            {"_", "_", "_"}
+    };
+
+    public static void main(String[] args) {
+        boolean keep = true;
+
+        while (keep) {
+            turn(1);
+            keep = showResult();
+            if (keep) {
+                turn(2);
+                keep = showResult();
+            }
+        }
+    }
+
+    public static Boolean showResult() {
+        Integer winner = verifyResult();
+        if (winner != null) {
+            if (winner.equals(1)) {
+                System.out.println("Player 1 is the winner!");
+            } else if (winner.equals(2)) {
+                System.out.println("Player 2 is the winner!");
+            } else if (winner.equals(0)) {
+                System.out.println("Draw!");
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public static void turn(int player) {
+        boolean choice = true;
+
+        do {
+            System.out.println("Player " + player + " turn.");
+            System.out.println("Choose a Column between 1 and 3.");
+            int column = scanner.nextInt();
+            System.out.println("Choose a Line between 1 and 3.");
+            int line = scanner.nextInt();
+            if (board[line - 1][column - 1].equals("_")) {
+                board[line - 1][column - 1] = (player == 1) ? "X" : "O";
+                choice = false;
+                printBoard(board);
+            } else {
+                printBoard(board);
+                System.out.println("Space already used.");
+            }
+        } while (choice);
+    }
+
+    public static void printBoard(String[][] board) {
+        System.out.println("\n");
+        for (String[] line : board) {
+            for (String column : line) {
+                System.out.print(column + "\t");
+            }
+            System.out.println("\n");
+        }
+        System.out.println("\n");
+    }
+
+    public static Integer verifyResult() {
+
+        if (!board[0][0].equals("_") && board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2])) {
+            return board[0][0].equals("X") ? 1 : 2;
+        }
+
+        if (!board[2][0].equals("_") && board[2][0].equals(board[1][1]) && board[1][1].equals(board[0][2])) {
+            return board[2][0].equals("X") ? 1 : 2;
+        }
+
+        for (int i = 0; i < board.length; i++) {
+            if (!board[i][0].equals("_") && board[i][0].equals(board[i][1]) && board[i][1].equals(board[i][2])) {
+                return board[i][0].equals("X") ? 1 : 2;
+            }
+            for (int j = 0; j < board[i].length; j++) {
+                if (!board[0][j].equals("_") && board[0][j].equals(board[1][j]) && board[1][j].equals(board[2][j])) {
+                    return board[0][j].equals("X") ? 1 : 2;
+                }
+            }
+        }
+
+        if (boardIsFull()) {
+            return 0;
+        }
+        return null;
+    }
+
+    public static boolean boardIsFull() {
+        boolean boardIsFull = true;
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j].equals("_")) {
+                    boardIsFull = false;
+                }
+            }
+        }
+
+        return boardIsFull;
+    }
+
+}
 ```
 
 </details>
