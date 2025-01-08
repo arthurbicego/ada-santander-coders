@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
 
-public class Functions {
+public class FunctionMethods {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -32,7 +32,7 @@ public class Functions {
     private static BigDecimal sumValues(Double number1, Double number2) {
         BigDecimal num1 = new BigDecimal(number1);
         BigDecimal num2 = new BigDecimal(number2);
-        BigDecimal sumValues = num1.add(num2).setScale(20, RoundingMode.UP);
+        BigDecimal sumValues = num1.add(num2).setScale(2, RoundingMode.UP);
         return sumValues;
     }
 

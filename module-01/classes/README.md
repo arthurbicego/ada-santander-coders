@@ -114,7 +114,7 @@ num6.toString();
 ---
 
 <details>
-  <summary>Operators</summary>
+  <summary>Big Types</summary>
 
 ```Java
 BigInteger intBig = new BigInteger("12");
@@ -268,6 +268,234 @@ System.out.println(name);
 // Another way to do it: Replace
 name.replace("Bomfim", "Bomfim da");
 ```
+
+</details>
+
+---
+
+<details>
+  <summary>Operators</summary>
+
+```Java
+// Comparison Operators (boolean)
+// >
+// <
+// >=
+// <=
+// ==
+// !=
+
+// Logical Operators (boolean)
+// And: &&
+// Or: ||
+// Not: !
+
+Integer i = 10;
+
+System.out.println(i.equals(2) || i.equals(26) || i.equals(28));
+// Negating the expression requires changing the operator.
+System.out.println(!i.equals(2) && !i.equals(26) && !i.equals(28));
+System.out.println(i >= 1 && i <= 4);
+System.out.println(List.of(2,26,28).contains(i));
+```
+
+</details>
+
+---
+
+<details>
+  <summary>Selection Structures</summary>
+
+### If
+
+```Java
+Scanner scanner = new Scanner(System.in);
+
+/*
+System.out.println("Type your name: ");
+String name = scanner.nextLine().toUpperCase();
+*/
+
+/*
+if(nome.contains("A")){
+    System.out.println("Your name contains A. You are at the front of the queue.");
+} else if (nome.contains("B")) {
+    System.out.println("Your name contains B. You are second in line.");
+} else {
+    System.out.println("You are at the end of the queue.");
+}
+*/
+
+System.out.println("Type your age: ");
+Integer age = scanner.nextInt();
+
+if (age < 12) {
+    System.out.println("You are a child.");
+} else if (age < 18) {
+    System.out.println("You are a teenager.");
+} else if (age < 60) {
+    System.out.println("You are an adult.");
+} else {
+    System.out.println("You are an elderly.");
+}
+```
+
+### Switch case
+
+```Java
+Scanner scanner = new Scanner(System.in);
+System.out.println("Type your age category: ");
+String ageCategory = scanner.nextLine();
+
+switch (ageCategory){
+    case "child":
+        System.out.println("You are a child.");
+        break;
+
+    case "teenager":
+        System.out.println("You are a teenager.");
+        break;
+
+    case "adult":
+        System.out.println("You are an adult.");
+        break;
+
+    case "elderly":
+        System.out.println("You are an elderly.");
+        break;
+
+    default:
+        System.out.println("Error. Category not found!");
+}
+```
+
+### Enhanced Switch
+
+```Java
+Scanner scanner = new Scanner(System.in);
+System.out.println("Type your age category: ");
+String ageCategory = scanner.nextLine();
+
+switch (ageCategory) {
+case "child","teenager" -> {
+    System.out.println("You are a child anyway.");
+    System.out.println("Young!");
+}
+
+// case "teenager" -> System.out.println("You are a teenager");
+
+case "adult" -> System.out.println("You are an adult.");
+
+case "elderly" -> System.out.println("You are an elderly.");
+
+default -> System.out.println("Error. Category not found!");
+}
+```
+
+### Ternary Operator
+```Java
+Scanner scanner = new Scanner(System.in);
+System.out.println("Type your age category: ");
+String ageCategory = scanner.nextLine();
+
+Integer number = ageCategory.equals("child") ? 1 : 2;
+System.out.println(number);
+```
+
+
+</details>
+
+---
+
+<details>
+  <summary>Function/Methods</summary>
+
+### Function Declarations
+
+```Java
+public static void main(String[] args) {
+
+// function accesses:
+// private -> accessed only through same class
+// protected -> accessed only through same class or child
+// public -> accessed only through any class of the project
+// no identity (package) -> accessed only through classes for same package
+
+// No static
+FunctionMethods sum = new FunctionMethods();
+String result1 = sum.sumValues1(2.0,3.0);
+System.out.println(result1);
+
+// With static in the same class in both methods
+String result2 = sumValues2(3.0,4.0);
+// No static in the method that calls the other:
+// String result2 = FunctionMethods.sumValues2(3.0,4.0);
+System.out.println(result2);
+}
+
+// No static
+public String sumValues1(Double number1, Double number2) {
+Double sum = number1 + number2;
+return sum.toString();
+}
+
+// With static
+public static String sumValues2(Double number1, Double number2) {
+Double sum = number1 + number2;
+return sum.toString();
+}
+```
+
+### Function Methods
+
+```Java
+public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    Double number1, number2;
+
+    System.out.println("Enter the first number: ");
+    number1 = scanner.nextDouble();
+    System.out.println("Enter the second number: ");
+    number2 = scanner.nextDouble();
+
+    scanner.nextLine();
+
+    System.out.println("Choose the desired operation (+, -, /, *): ");
+    String operation = scanner.next().trim();
+
+    switch (operation){
+        case "+" -> System.out.println(sumValues(number1, number2));
+        case "-" -> System.out.println(subtractValues(number1, number2));
+        case "/" -> System.out.println(divideValues(number1, number2));
+        case "*" -> System.out.println(multiplyValues(number1, number2));
+        default -> System.out.println("Unidentified operation.");
+    }
+}
+
+private static BigDecimal sumValues(Double number1, Double number2) {
+    BigDecimal num1 = new BigDecimal(number1);
+    BigDecimal num2 = new BigDecimal(number2);
+    BigDecimal sumValues = num1.add(num2).setScale(20, RoundingMode.UP);
+    return sumValues;
+}
+
+private static Double subtractValues(Double number1, Double number2) {
+    Double subtractValues = number1 - number2;
+    return subtractValues;
+}
+
+private static Double divideValues(Double number1, Double number2) {
+    Double divideValues = number1 / number2;
+    return divideValues;
+}
+
+private static Double multiplyValues(Double number1, Double number2) {
+    Double multiplyValues = number1 * number2;
+    return multiplyValues;
+}
+```
+
 
 </details>
 

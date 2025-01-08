@@ -4,12 +4,20 @@ import java.util.List;
 
 public class Operators {
     public static void main(String[] args) {
-        // Logical Operators
+        // Comparison Operators (boolean)
+        // >
+        // <
+        // >=
+        // <=
+        // ==
+        // !=
+
+        // Logical Operators (boolean)
         // And: &&
         // Or: ||
         // Not: !
 
-        Integer i = 10;
+        Integer i = 2;
 
         System.out.println(i.equals(2) || i.equals(26) || i.equals(28));
         // Negating the expression requires changing the operator.
