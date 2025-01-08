@@ -29,7 +29,7 @@ Object-oriented programming (OOP) is a programming paradigm based on the concept
 <details>
   <summary>Variables and Types</summary>
 
-  ### Primitive and Wrap Types
+### Primitive and Wrap Types
 
 ```Java
 // the word 'final' defines a fixed value for the variable.
@@ -64,7 +64,7 @@ String name = "Pedro";
 //var num5 = '0';
 ```
 
-  ### Object Equals and get Class
+### Object Equals and get Class
 
 ```Java
 Object number1 = 10.0;
@@ -134,7 +134,19 @@ System.out.println(decBig);
 <details>
   <summary>Inputs and Outputs</summary>
 
-  ### Outputs
+### Inputs
+```Java
+Scanner scanner = new  Scanner(System.in);
+
+String emailLogin = "arthurbq5@gmail.com";
+System.out.println("Type your e-mail: ");
+String email = scanner.nextLine();
+
+System.out.println(emailLogin.equals(email));
+```
+
+
+### Outputs
 
 ```Java
 System.out.print("Welcome\t");
@@ -156,9 +168,105 @@ System.out.printf("Welcome %s, your age is %d and your lucky number is %.2f", na
 ---
 
 <details>
-  <summary>Functions</summary>
+  <summary>String Functions</summary>
+
+### String Manipulation
 
 ```Java
+Scanner scanner = new Scanner(System.in);
+
+System.out.println("Type your email: ");
+String email = scanner.nextLine();
+
+// .trim: remove spaces from beginning and end
+System.out.println(email.trim());
+
+// .toLowerCase
+System.out.println(email.toLowerCase());
+
+// .toUperCase
+System.out.println(email.toUpperCase());
+```
+
+### String Validation
+
+```Java
+Scanner scanner = new Scanner(System.in);
+
+System.out.println("Type your email: ");
+String email = scanner.nextLine();
+
+// .contains: checks if a string contains another string.
+System.out.println("Contains @: " + email.contains("@"));
+System.out.println("Contains .: " + email.contains("."));
+
+//.length returns the number of characters
+System.out.println("Email size: " + email.length());
+System.out.println("Minimum size: " + (email.length() >= 5));
+
+// .indexOf returns the position of a character in a String.
+System.out.println("Validate characters before @:" + (email.indexOf("@") > 0));
+
+// .substring returns a piece of the String (1 - puts only the initial position until the end of the String; 2 - defines the initial and final position of the String).
+String emailAfterAtSign = email.substring(email.indexOf("@"));
+
+System.out.println("Validate characters between @ e .:" + (emailAfterAtSign.indexOf(".") > 1));
+
+System.out.println("Validate characters after .:" + (emailAfterAtSign.length() > emailAfterAtSign.indexOf(".") + 1));
+
+// .split splits the string into an array by the number of times according to the declared criteria
+System.out.println("Split array: " + Arrays.toString(email.split("@")));
+        System.out.println("Validate just one @: " + (email.split("@").length == 2));
+```
+
+### String Handling
+
+```Java
+Scanner scanner = new Scanner(System.in);
+
+System.out.println("Type the name: ");
+String nome = scanner.nextLine();
+
+// Every String is immutable - wherever change you do in String you are creating another String.
+nome = nome.toUpperCase();
+
+String firstUpperCase = nome.substring(0, 1).toUpperCase();
+// If you want to get only 1 character:
+// Character firstUpperCase = nome.toUpperCase().charAt(0);
+
+String nameWithoutFirst = nome.substring(1).toLowerCase();
+String nameHandled = firstUpperCase + nameWithoutFirst;
+System.out.println(nameHandled);
+
+//it does not counter spaces
+System.out.println(nome.isEmpty());
+
+//it counters spaces
+System.out.println(nome.isBlank());
+```
+
+### String Handling Example: Names Handling
+
+```Java
+String namePedro = "Pedro Bomfim Costa";
+
+String firstName = namePedro.split(" ")[0];
+String secondName = namePedro.split(" ")[1];
+String thirdName = namePedro.split(" ")[2];
+
+String fullName = firstName + " " + secondName + " da " + thirdName;
+System.out.println(fullName);
+
+// Another way to do it: Handling the Array
+String name = "Pedro Bomfim Costa";
+
+String[] nameParts = name.split(" ");
+nameParts[1] += " da";
+name = String.join(" ", nameParts);
+System.out.println(name);
+
+// Another way to do it: Replace
+name.replace("Bomfim", "Bomfim da");
 ```
 
 </details>
@@ -176,7 +284,7 @@ System.out.printf("Welcome %s, your age is %d and your lucky number is %.2f", na
 ---
 
 <details>
-  <summary>Arrays, Matrices, String</summary>
+  <summary>Arrays, Matrix, String</summary>
 
 ```Java
 ```
